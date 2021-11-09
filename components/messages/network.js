@@ -1,9 +1,14 @@
 const express = require('express');
+const multer = require('multer');
 const controller = require('./controller')
 const response = require('../../network/response');
 
 
 const router = express.Router();
+
+const upload = multer({
+    dest: 'uploads/'
+})
 
 router.get('/', function(req, res) {
     const filterMessages = req.query.user || null;
@@ -16,13 +21,13 @@ router.get('/', function(req, res) {
     
 });
 
-router.post('/', function(req, res) {
+router.post('/', upload.single('file'), function(req, res) {
 
-    controller.addMessage(req.body.user, req.body.message)
+    controller.addMessage(req.body.chat, req.body.user, req.body.message)
     .then((fullMessage) => {
         response.success(req, res, fullMessage, 201)
     }).catch(e => {
-        response.error(req, res, 'Informacion invalida', 400, 'Error en el controlador')
+        response.error(req, res, 'Informacion invalida', 400, e)
     });
 });
 

@@ -14,12 +14,12 @@ function addMessage(message) {
     myMessage.save();
 }
 
-function getMessages(filterUser) {
+function getMessages(filterChat) {
     return new Promise((resolve, reject) => {
         let filter = {};
-        if (filterUser != null) {
+        if (filterChat != null) {
             filter = {
-                user: filterUser
+                chat: filterChat
             }
         }
         Model.find(filter)
