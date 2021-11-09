@@ -152,5 +152,6 @@ dist
 !.vscode/*.code-snippets
 
 uploads/
+public/files/
 
 # End of https://www.toptal.com/developers/gitignore/api/node,visualstudiocode
